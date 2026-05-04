@@ -1,0 +1,778 @@
+% !TEX program = xelatex
+\documentclass[12pt,a4paper]{article}
+
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{english}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{amsmath,amssymb,amsfonts,mathtools,bm}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{microtype}
+\geometry{margin=2.5cm}
+\hypersetup{colorlinks=true,linkcolor=black,urlcolor=blue,citecolor=black}
+\setlength{\emergencystretch}{3em}
+\sloppy
+
+\DeclareMathOperator{\Adm}{Adm}
+\DeclareMathOperator{\Struct}{Struct}
+\DeclareMathOperator{\Dist}{Dist}
+\DeclareMathOperator{\Dom}{Dom}
+\DeclareMathOperator{\Cond}{Cond}
+\DeclareMathOperator{\Loss}{Loss}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\Diff}{Diff}
+\DeclareMathOperator{\Spin}{Spin}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\Lie}{Lie}
+
+\newcommand{\M}{\mathcal M_U}
+\newcommand{\MI}{\mathcal M_I}
+\newcommand{\EI}{\mathcal E_I}
+\newcommand{\Hilb}{\mathcal H}
+\newcommand{\Prob}{\mathbb P}
+\newcommand{\Lag}{\mathcal L}
+\newcommand{\Acal}{\mathbb A_I}
+\newcommand{\Fcal}{\mathbb F_I}
+\newcommand{\TMI}{\mathcal T_{\mathrm{MI}}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\dd}{\,d}
+\newcommand{\Rplus}{\mathbb R_+}
+\newcommand{\gfrak}{\mathfrak G}
+\newcommand{\statementbox}[1]{\begin{center}\fbox{\begin{minipage}{0.9\linewidth}\centering #1\end{minipage}}\end{center}}
+
+\title{\textbf{Theory of Manifold Interfaces}\\
+\large Regularized Effective Physical Layer and Interface-Field Program}
+\author{Salkutsan Aleksey}
+\date{May 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This paper presents the physical layer of the Theory of Manifold Interfaces as a regularized effective interface-field research program. The central formula states that geometry determines the domain of admissible physical transitions, quantum theory determines a probability distribution over this domain, and an interface field mediates the transition from distributed possibilities to stable physical structures. Formally, the construction is expressed as
+\[
+ g\Rightarrow\Adm_c(g)\Rightarrow\Hilb_I(g)\Rightarrow\Psi_I
+ \Rightarrow\Dist_{\mathrm{poss}}(\Psi_I;g)\Rightarrow\chi_I\Rightarrow\Struct_I.
+\]
+The paper introduces a minimal interface field $\chi_I$, an effective action, a regularized space of geometries, an interface distance between geometry classes, a physical normalization of the interface decoherence coefficient, consistency limits recovering general relativity and the Standard Model, and an observable matrix for quantum-geometric decoherence, the dark sector, black holes, and an interface-field architecture for unification. The paper does not claim to provide a completed fundamental theory or a final Theory of Everything. Its result is a rigorous effective model with explicit definitions, consistency limits, falsifiable hypotheses, and open problems.
+\end{abstract}
+
+\noindent\textbf{Keywords:} Theory of Manifold Interfaces; interface field; admissible transitions; quantum geometry; decoherence; dark sector; black holes; Standard Model; unification; effective field theory.
+
+\tableofcontents
+\newpage
+
+\section{Introduction}
+Fundamental physics contains several powerful but conceptually distinct descriptions. General relativity describes spacetime through the metric $g_{\mu\nu}$ and relates it to energy and momentum through Einstein's equation. Quantum theory describes physical states as vectors, functionals, or density matrices that encode distributions of possible outcomes. The Standard Model describes gauge interactions and fermionic fields. Cosmology and black-hole physics add further unresolved issues: the dark sector, horizons, entropy, the information problem, and the quantum nature of geometry.
+
+The Theory of Manifold Interfaces proposes a common language connecting three operations: admissibility, distribution, and structuring. In the physical layer of TMI, geometry answers which transitions are physically admissible; quantum theory answers how possibilities are distributed; the interface field answers how a distribution of possibilities becomes a stable structure.
+
+The central chain is
+\[
+\boxed{
+ g\Rightarrow\Adm_c(g)\Rightarrow\Hilb_I(g)\Rightarrow\Psi_I
+ \Rightarrow\Dist_{\mathrm{poss}}(\Psi_I;g)\Rightarrow\chi_I\Rightarrow\Struct_I .}
+\]
+In words,
+\[
+\boxed{\text{geometry determines admissibility;}\qquad
+\text{quantum theory determines distribution;}\qquad
+\text{the interface field determines structuring.}}
+\]
+
+The aim of this paper is to assemble this chain into a coherent physical layer: to define the basic objects, write a minimal action, derive the equations of motion, identify the main regimes, define observable quantities, state limitations, and formulate the status of the model. The central methodological point is that TMI-Physics is treated as an effective interface-field program, not as a completed fundamental theory. This prevents overstatement and makes the proposal suitable for further refinement.
+
+\section{Relation to Previous TMI Materials}
+This publication is a synthetic step in the physical branch of the Theory of Manifold Interfaces. Previous modules treated the mathematical abstraction of TMI, a cautious interface approach to quantum gravity, quantum-geometric decoherence, the dark sector as an interface field, black holes as causal-informational interfaces, and the interface-field architecture of unification. In this paper these topics are not treated as isolated branches. They are unified as regimes of one minimal system:
+\[
+\boxed{(g_{\mu\nu},\Psi,\chi_I,\Acal,\mathcal G_I)\Rightarrow(QG,Dark,BH,SM,Gen,ToE).}
+\]
+Here $QG$ denotes the quantum-geometric regime, $Dark$ the dark sector, $BH$ black holes, $SM$ the Standard Model as a limiting sector, $Gen$ the fermion-generation structure, and $ToE$ the unification program through a universal interface connection.
+
+\section{Geometric Admissibility of Physical Transitions}
+Let $(\M,g)$ be a spacetime with Lorentzian metric. At each point $x\in\M$ there is a tangent space $T_x\M$. Define the future interface causal cone by
+\[
+\boxed{
+\mathcal C^{+}_{I,g}(x):=
+\{v\in T_x\M\setminus\{0\}\mid g_x(v,v)\leq0,\ v\ \text{is future-directed}\}.
+}
+\]
+This is not a new object beyond general relativity. It is the standard future causal cone interpreted as the set of locally admissible directions of physical interface transition:
+\[
+\boxed{\mathcal C^{+}_{I,g}(x)\equiv\mathcal C^{+}_{g}(x).}
+\]
+Its boundary is given by
+\[
+ g_x(v,v)=0,
+\]
+and therefore
+\[
+\boxed{\partial\mathcal C^{+}_{I,g}(x)\equiv\mathcal C^{+}_{\mathrm{light},g}(x).}
+\]
+Thus the light cone is interpreted in TMI as the boundary of admissible causal interface transition.
+
+Let $J_g^+(x)$ denote the causal future of $x$. The set of causally admissible transitions is defined by
+\[
+\boxed{
+\Adm_c(g):=\{(x,y)\in\M\times\M\mid y\in J_g^+(x)\}.
+}
+\]
+This fixes the first layer of the theory:
+\[
+\boxed{g\Rightarrow\mathcal C^+_{I,g}(x)\Rightarrow J_g^+(x)\Rightarrow\Adm_c(g).}
+\]
+The physical meaning is that the metric determines not only distances and curvature but also the structure of physically admissible transitions.
+
+\section{Quantum Distribution over the Admissible Domain}
+Geometry determines the admissible domain, but it does not determine which admissible transition is realized. A quantum layer is therefore introduced. Consider the measurable space
+\[
+(\Adm_c(g),\mathcal B_g,\mu_g),
+\]
+where $\mathcal B_g$ is a $\sigma$-algebra of measurable subsets and $\mu_g$ is an effective or regularized measure. A complete fundamental measure on the general space of transitions or geometries is not assumed to be constructed in this paper. Four levels are allowed:
+\[
+\boxed{\mu_g\in\{\mu_g^{disc},\mu_g^{mini},\mu_g^{cyl},\mu_g^{PI}\}.}
+\]
+Here $\mu_g^{disc}$ is a discrete measure, $\mu_g^{mini}$ a minisuperspace measure, $\mu_g^{cyl}$ a cylindrical measure on a regularized projective system, and $\mu_g^{PI}$ an effective path-integral measure.
+
+The Hilbert space of interface possibilities is
+\[
+\boxed{
+\Hilb_I(g):=L^2(\Adm_c(g),\mathcal B_g,\mu_g).
+}
+\]
+If $\psi_I\in\Hilb_I(g)$, then the probability distribution on admissible transitions is
+\[
+\boxed{
+ d\Prob_{\Psi,g}(\Phi)=|\psi_I(\Phi)|^2\,d\mu_g(\Phi),\qquad \Phi\in\Adm_c(g).
+}
+\]
+The second layer is therefore
+\[
+\boxed{\Adm_c(g)\Rightarrow\Hilb_I(g)\Rightarrow\Psi_I\Rightarrow\Dist_{\mathrm{poss}}(\Psi_I;g).}
+\]
+
+\section{Interface Structuring of Possibilities}
+A distribution of possibilities is not identical to a realized structure. The interface field is introduced to describe the transition from distribution to stable physical regime. In the minimal model,
+\[
+\boxed{\chi_I:\M\to\mathbb R,}
+\]
+and in a more general geometric form,
+\[
+\boxed{\chi_I\in\Gamma(\mathcal E_\chi),\qquad \mathcal E_\chi\to\M.}
+\]
+Interface structuring is defined as a map
+\[
+\boxed{
+\mathcal S_I:\Dist_{\mathrm{poss}}(\Psi_I;g)\longrightarrow\Struct_I.
+}
+\]
+More fully,
+\[
+\boxed{
+\Struct_I=\mathcal S_I(g,\Psi_I,\chi_I,\Adm_c(g)).
+}
+\]
+In the simplest two-geometry model,
+\[
+ |\Psi_g\rangle=c_1|g_1\rangle+c_2|g_2\rangle,
+ \qquad |c_1|^2+|c_2|^2=1,
+\]
+coherence between the alternatives is represented by an off-diagonal density-matrix element. Interface structuring is modeled by
+\[
+\boxed{
+ |\rho_{12}(t)|=e^{-\Gamma_I t}|\rho_{12}(0)|.
+}
+\]
+A natural degree of structuring is
+\[
+\boxed{
+\Struct_I(t):=1-\frac{|\rho_{12}(t)|}{|\rho_{12}(0)|}=1-e^{-\Gamma_I t}.
+}
+\]
+
+\section{Minimal Effective Action}
+The physical layer of TMI is encoded by the minimal effective action
+\[
+\boxed{S_{TMI}^{min}=S_{GR}+S_{SM}+S_\chi+S_{mix}+S_{dec}^{eff}.}
+\]
+In local form,
+\[
+\boxed{
+S_{TMI}^{min}=\int_{\M}\sqrt{-g}\left[
+\frac{c^4}{16\pi G}(R-2\Lambda)+\Lag_{SM}+\Lag_\chi+\Lag_{mix}
+\right]d^4x+S_{dec}^{eff}.
+}
+\]
+Here $S_{dec}^{eff}$ is not a fundamental local action in the usual sense. It is an effective term for open quantum dynamics and interface-induced decoherence.
+
+The minimal Lagrangian of the interface field is
+\[
+\boxed{
+\Lag_\chi=-\frac12 g^{\mu\nu}\nabla_\mu\chi_I\nabla_\nu\chi_I
+-V(\chi_I)-\frac12\xi_I R\chi_I^2.
+}
+\]
+The potential is
+\[
+\boxed{
+V(\chi_I)=V_0+\frac12m_I^2\chi_I^2+\frac{\beta_I}{4}\chi_I^4.
+}
+\]
+Stability of the minimal model requires the potential to be bounded from below. A sufficient simple condition is
+\[
+\boxed{\beta_I>0,
+\qquad V(\chi_I)\geq0\ \text{in the physically admissible domain}.}
+\]
+
+Allowed mixings must preserve the gauge structure of the Standard Model. Thus, in the minimal version $\chi_I$ is chosen as a gauge singlet:
+\[
+\boxed{\chi_I\sim(\mathbf1,\mathbf1,0)\quad\text{with respect to }SU(3)\times SU(2)\times U(1)_Y.}
+\]
+An example of a gauge-safe mixing term is
+\[
+\boxed{
+\Lag_{mix}^{gauge}=-\frac14\sum_a\zeta_a\frac{\chi_I^2}{M_I^2}F^a_{\mu\nu}F_a^{\mu\nu}.
+}
+\]
+
+\section{Equations of Motion of the Minimal Model}
+Variation with respect to the metric gives the generalized geometric equation
+\[
+\boxed{
+G_{\mu\nu}+\Lambda g_{\mu\nu}
+=\frac{8\pi G}{c^4}\left(T_{\mu\nu}^{SM}+T_{\mu\nu}^{\chi}+T_{\mu\nu}^{mix}\right)+\mathcal D_{\mu\nu}^{eff}.
+}
+\]
+The term $\mathcal D_{\mu\nu}^{eff}$ denotes a possible effective correction from open quantum dynamics. If the backreaction of decoherence on geometry is not included, one may set $\mathcal D_{\mu\nu}^{eff}=0$.
+
+Variation with respect to $\chi_I$ gives the interface-field equation
+\[
+\boxed{
+\Box_g\chi_I-(m_I^2+\xi_I R)\chi_I-\beta_I\chi_I^3=-J_I.
+}
+\]
+The source $J_I$ encodes the excitation of the interface field by quantum-geometric or matter configurations. In the QG regime the minimal form is
+\[
+\boxed{J_I=\alpha_I |c_1|^2|c_2|^2d_I^2(g_1,g_2).}
+\]
+Open quantum dynamics is written as
+\[
+\boxed{
+\frac{d\rho}{dt}=-\frac{i}{\hbar}[\widehat H_{eff},\rho]+\mathcal L_{dec}^{I}[\rho].
+}
+\]
+The minimal decoherence superoperator is
+\[
+\boxed{
+\mathcal L_I[\rho]=-\frac{1}{2}\kappa_I[\widehat D_I,[\widehat D_I,\rho]].
+}
+\]
+Gauge fields obey modified equations of the form
+\[
+\boxed{
+D_\mu\left[\left(1+\zeta_a\frac{\chi_I^2}{M_I^2}\right)F_a^{\mu\nu}\right]=J_a^\nu.
+}
+\]
+
+\section{Regularized Space of Geometries}
+The quantum-geometric regime requires moving from a finite superposition of geometries to a space of geometric possibilities. Let $\mathcal G(\M)$ be the space of admissible Lorentzian metrics. A physical geometry is not a coordinate representation of a metric but a diffeomorphism class:
+\[
+\boxed{[g]=\{\varphi^*g\mid \varphi\in\Diff(\M)\}.}
+\]
+The space of physical geometries is
+\[
+\boxed{\gfrak:=\mathcal G(\M)/\Diff(\M).}
+\]
+A complete measure on $\gfrak$ is not claimed to be constructed. Instead, a finite-dimensional regularization is introduced:
+\[
+\boxed{\mathcal G_N\subset\mathcal G(\M),\qquad \gfrak_N=\mathcal G_N/\Diff_N.}
+\]
+The working Hilbert space of geometries is
+\[
+\boxed{
+\Hilb_G^{eff}=L^2(\gfrak_N,\mathcal B_N,\mu_G^{cyl}).
+}
+\]
+Here $\mu_G^{cyl}$ is a regularized cylindrical measure. It is not declared to be a final fundamental measure, but it provides a computable hierarchy of approximations.
+
+The interface distance between physical geometries must compare equivalence classes rather than coordinate representatives:
+\[
+\boxed{d_I([g_1],[g_2]).}
+\]
+A general effective form is
+\[
+\boxed{
+d_I([g_1],[g_2])=\frac1{\mathcal N_I}\inf_{\varphi\in\Diff(\M)}
+\left[\int_\Omega w_I(x)\|g_1-\varphi^*g_2\|_{g_0}^2dV_{g_0}\right]^{1/2}.
+}
+\]
+In the minisuperspace model with scale factor $a$,
+\[
+\boxed{d_I(g(a_1),g(a_2))=\left|\ln\frac{a_1}{a_2}\right|.}
+\]
+
+\section{Physical Normalization of the Decoherence Coefficient}
+The QG module uses the observable excess
+\[
+\boxed{\Delta\Gamma_I=\kappa_I x_I,}
+\]
+where
+\[
+\boxed{x_I=|c_1|^2|c_2|^2d_{I,N}^2([g_1],[g_2]).}
+\]
+If $x_I$ is dimensionless, then $\kappa_I$ has dimensions of inverse time. A physically natural normalization is therefore given by the characteristic frequency of the interface field:
+\[
+\boxed{\omega_I=\frac{m_Ic^2}{\hbar}.}
+\]
+Then
+\[
+\boxed{\kappa_I=\frac{m_Ic^2}{\hbar}\mathcal K_I.}
+\]
+In the minimal effective model,
+\[
+\boxed{\mathcal K_I=\lambda_I\alpha_I^2,}
+\]
+and a more general expression may include curvature, self-interaction, and energy-scale corrections:
+\[
+\boxed{
+\kappa_I=\frac{m_Ic^2}{\hbar}\lambda_I\alpha_I^2\,
+\mathcal F_I\left(\frac{\xi_I R}{m_I^2},\beta_I,\frac{E}{M_I},\ldots\right).
+}
+\]
+Thus $\kappa_I$ is no longer a completely arbitrary parameter: it is tied to the scale of the interface field and to dimensionless couplings.
+
+\section{Quantum Dynamics of the Metric in the Regularized Model}
+The quantum state of geometry is now considered as a function on the space of physical geometries:
+\[
+\boxed{\Psi_G([g],t)\in\Hilb_G^{eff}.}
+\]
+Normalization is
+\[
+\boxed{\int_{\gfrak_N}|\Psi_G([g],t)|^2d\mu_G^{cyl}([g])=1.}
+\]
+An effective dynamical equation may be written as
+\[
+\boxed{i\hbar\frac{\partial}{\partial t}\Psi_G([g],t)=\widehat H_G^{eff}\Psi_G([g],t).}
+\]
+The parameter $t$ must be understood cautiously: it is an effective or internal time associated with a chosen regularization, not a complete solution of the problem of time in quantum gravity. A more covariant form is a constraint
+\[
+\boxed{\widehat{\mathcal H}_{TMI}\Psi=0.}
+\]
+For open dynamics it is more convenient to use the density matrix:
+\[
+\boxed{
+\frac{d\rho_G}{dt}=-\frac{i}{\hbar}[\widehat H_G^{eff},\rho_G]
+-\frac12\kappa_I[\widehat D_I,[\widehat D_I,\rho_G]].
+}
+\]
+If $\widehat D_I$ distinguishes geometries by $d_{I,N}$, then
+\[
+\boxed{\Gamma_I([g_1],[g_2])=\kappa_I d_{I,N}^2([g_1],[g_2]).}
+\]
+Therefore,
+\[
+\boxed{\rho_G([g_1],[g_2];t)=e^{-\Gamma_I([g_1],[g_2])t}\rho_G([g_1],[g_2];0).}
+\]
+A classical metric appears as a decohered limit of a quantum distribution of geometries:
+\[
+\boxed{\rho_G([g_1],[g_2])\to0\quad([g_1]\ne[g_2])\Rightarrow g_{\mu\nu}^{cl}.}
+\]
+
+\section{Recovery of the Standard Model and Projections of Interactions}
+A safe structure of the universal interface group is
+\[
+\boxed{G_I=G_{\mathrm{grav}}\ltimes G_{SM}\ltimes G_\chi,}
+\]
+where
+\[
+\boxed{G_{SM}=SU(3)\times SU(2)\times U(1)_Y,
+\qquad G_{\mathrm{grav}}\supset\Spin(1,3).}
+\]
+The algebra of the minimal model is
+\[
+\boxed{\mathfrak g_I=\mathfrak g_{\mathrm{grav}}\oplus\mathfrak{su}(3)\oplus\mathfrak{su}(2)\oplus\mathfrak u(1)\oplus\mathfrak g_\chi.}
+\]
+The universal interface connection is
+\[
+\boxed{\Acal=\omega^{ab}J_{ab}+G^AT_A+W^iT_i+BY+A_\chi^r\Xi_r.}
+\]
+The universal curvature is
+\[
+\boxed{\Fcal=d\Acal+\Acal\wedge\Acal.}
+\]
+Introduce algebra projections
+\[
+\boxed{\pi_a:\mathfrak g_I\to\mathfrak g_a,
+\qquad a\in\{G,3,2,1,\chi\}.}
+\]
+They satisfy
+\[
+\boxed{\pi_a^2=\pi_a,
+\quad \pi_a\pi_b=0\ (a\ne b),
+\qquad \sum_a\pi_a=\mathrm{id}_{\mathfrak g_I}.}
+\]
+Then
+\[
+\boxed{F_a=\pi_a(\Fcal).}
+\]
+The statement that interactions are projections of a universal interface curvature is therefore given a precise meaning.
+
+The electromagnetic sector appears after electroweak symmetry breaking:
+\[
+\boxed{SU(2)\times U(1)_Y\to U(1)_{EM}.}
+\]
+Thus
+\[
+\boxed{A_\mu^{EM}=\sin\theta_W W_\mu^3+\cos\theta_WB_\mu.}
+\]
+The safe Standard Model limit is
+\[
+\boxed{g_{\mu\nu}=g_{\mu\nu}^{fixed},\quad \chi_I\to0,
+\quad S_{mix}\to0\Rightarrow S_{TMI}^{min}\to S_{SM}.}
+\]
+With gravity,
+\[
+\boxed{\chi_I\to0,
+\quad S_{mix}\to0\Rightarrow S_{TMI}^{min}\to S_{GR}+S_{SM}.}
+\]
+
+\section{Fermion Generations as Stable Interface Modes}
+The Standard Model contains three generations of fermions but does not derive their number from first principles. TMI introduces an internal generation space $\Hilb_{gen}$ and a generation-structuring interface operator
+\[
+\boxed{\mathcal G_I:\Hilb_{gen}\to\Hilb_{gen}.}
+\]
+The spectral problem is
+\[
+\boxed{\mathcal G_I\psi_f=\lambda_f\psi_f.}
+\]
+A fermionic state has the form
+\[
+\boxed{\Psi_f\in\Hilb_{SM}\otimes\Hilb_{gen},
+\qquad \Psi_f=\psi_{SM}\otimes\psi_{gen}^{(f)}.}
+\]
+The generation operator must not destroy the gauge structure:
+\[
+\boxed{[\mathcal G_I,G_{SM}]=0.}
+\]
+Physical generations are identified with stable modes:
+\[
+\boxed{f\leftrightarrow\psi_f\in\Spec_{stable}(\mathcal G_I).}
+\]
+The weak result is that generations are formalized as stable interface modes. The strong result remains open:
+\[
+\boxed{|\Spec_{stable}(\mathcal G_I)|=3.}
+\]
+Fermion masses may depend on the interface mode:
+\[
+\boxed{m_f=\frac{v_H}{\sqrt2}\left[y_f^{SM}+\eta_f\frac{\lambda_f\langle\chi_I\rangle}{M_I}\right].}
+\]
+Generation mixing may arise from non-diagonality of the generation operator:
+\[
+\boxed{\Delta Y_{ij}^{I}=\eta_{ij}\frac{\langle\psi_i|\mathcal G_I|\psi_j\rangle}{M_I}\langle\chi_I\rangle.}
+\]
+
+\section{Physical Regimes of the Minimal System}
+The minimal system contains four key objects:
+\[
+\boxed{g_{\mu\nu},\qquad\Psi,
+\qquad\chi_I,
+\qquad\Acal.}
+\]
+They generate the main physical regimes.
+
+\subsection{Quantum-Geometric Regime}
+The QG regime describes the suppression of coherence between geometric alternatives:
+\[
+\boxed{\Delta\Gamma_I=\kappa_Ix_I,
+\qquad x_I=|c_1|^2|c_2|^2d_I^2([g_1],[g_2]).}
+\]
+The observable effect is excess geometric decoherence.
+
+\subsection{Dark Sector}
+The dark sector is described as an effective contribution of the interface field:
+\[
+\boxed{T_{\mu\nu}^{dark}=T_{\mu\nu}^{I}[\chi_I,g].}
+\]
+The decomposition
+\[
+\boxed{\chi_I(x,t)=\chi_0(t)+\delta\chi(x,t)}
+\]
+gives two regimes:
+\[
+\boxed{\chi_0(t)\Rightarrow DE,
+\qquad \delta\chi(x,t)\Rightarrow DM.}
+\]
+For the background mode,
+\[
+\boxed{w_I=\frac{\frac12\dot\chi_0^2-V(\chi_0)}{\frac12\dot\chi_0^2+V(\chi_0)}.}
+\]
+If $V(\chi_0)\gg\frac12\dot\chi_0^2$, then $w_I\approx-1$.
+
+\subsection{Black Holes}
+In TMI a black hole is a one-way causal-informational interface. For a Schwarzschild black hole,
+\[
+\boxed{r_s=\frac{2GM}{c^2}.}
+\]
+The horizon $r=r_s$ is the boundary of admissible outward causal transitions:
+\[
+\boxed{\mathcal H_g=\partial\Adm_{out}.}
+\]
+Inside the horizon the classical outward channel is forbidden:
+\[
+\boxed{r<r_s\Rightarrow\Adm_{out}^{class}=\varnothing.}
+\]
+The quantum outward channel is associated with Hawking radiation. The temperature
+\[
+\boxed{T_H=\frac{\hbar c^3}{8\pi GMk_B}}
+\]
+is interpreted as the intensity of the quantum outward interface channel.
+
+\subsection{Unification Architecture}
+The ToE regime is understood cautiously: it is not a completed Theory of Everything but an interface-field program toward unification. The four interactions are described as projections of a universal interface curvature:
+\[
+\boxed{\Fcal\Rightarrow(F_G,F_3,F_2,F_1,F_\chi),
+\qquad F_a=\pi_a(\Fcal).}
+\]
+Interface corrections to gauge couplings have the form
+\[
+\boxed{\frac{\Delta g_a}{g_a}\approx-\frac12\zeta_a\frac{\chi_I^2}{M_I^2}.}
+\]
+
+\section{Observable Matrix and Falsification Criteria}
+The physical layer becomes a testable program only if observable outputs are specified. Define the matrix
+\[
+\boxed{
+\mathcal T_{TMI}^{phys}=\left(\Delta\Gamma_I,
+ w_I(z),G_{eff}(k,z),\rho_{corr},\Delta_a(E)\right).
+}
+\]
+Here:
+\begin{itemize}[leftmargin=2em]
+\item $\Delta\Gamma_I=\Gamma_{obs}-\Gamma_{std}$ is excess geometric decoherence;
+\item $w_I(z)$ is a possible deviation of dark energy from ideal $w=-1$;
+\item $G_{eff}(k,z)$ is a possible effective gravitational coupling in the dark sector;
+\item $\rho_{corr}$ is a correlation contribution to black-hole radiation;
+\item $\Delta_a(E)$ is an interface correction to gauge couplings.
+\end{itemize}
+
+For the QG regime,
+\[
+\boxed{H_0^{QG}:\Delta\Gamma_I=0,}
+\qquad
+\boxed{H_{TMI}^{QG}:\Delta\Gamma_I=\kappa_Ix_I.}
+\]
+For the dark sector,
+\[
+\boxed{H_0^{Dark}:w=-1,\ DM\ \text{and}\ DE\ \text{are independent},}
+\]
+\[
+\boxed{H_{TMI}^{Dark}:DM\ \text{and}\ DE\ \text{are regimes of one field}\ \chi_I.}
+\]
+For black holes,
+\[
+\boxed{H_0^{BH}:\rho_{rad}=\rho_{thermal},}
+\qquad
+\boxed{H_{TMI}^{BH}:\rho_{rad}=\rho_{thermal}+\rho_{corr}.}
+\]
+For unification,
+\[
+\boxed{H_0^{ToE}:\Delta_a(E)=0,}
+\qquad
+\boxed{H_{TMI}^{ToE}:\Delta_a(E)=\zeta_a\frac{\chi_I^2(E)}{M_I^2}.}
+\]
+
+\section{Consistency Conditions}
+The physical layer is admissible only if known theories are recovered in the appropriate limits.
+
+\subsection{General Relativity Limit}
+If
+\[
+\boxed{\chi_I\to0,
+\quad S_{mix}\to0,
+\quad S_{dec}^{eff}\to0,}
+\]
+then
+\[
+\boxed{S_{TMI}^{min}\to S_{GR}+S_{matter}.}
+\]
+With no matter,
+\[
+\boxed{S_{TMI}^{min}\to S_{GR}.}
+\]
+
+\subsection{Quantum Limit}
+For fixed geometry and vanishing interface decoherence,
+\[
+\boxed{g_{\mu\nu}=g_{\mu\nu}^{fixed},\quad\Gamma_I\to0,}
+\]
+standard quantum dynamics must be recovered:
+\[
+\boxed{i\hbar\frac{\partial}{\partial t}\Psi=\widehat H\Psi.}
+\]
+
+\subsection{Standard Model Limit}
+If
+\[
+\boxed{g_{\mu\nu}=g_{\mu\nu}^{fixed},\quad \chi_I\to0,
+\quad \zeta_a,\eta_H,y_{I,f}\to0,}
+\]
+then
+\[
+\boxed{S_{TMI}^{min}\to S_{SM}.}
+\]
+
+\section{Levels of Claims and Limitations}
+To avoid mixing different types of claims, three levels are distinguished.
+
+\subsection{Level A: Internal Consequences}
+These are statements following from definitions. For example,
+\[
+\boxed{g\Rightarrow\Adm_c(g)}
+\]
+follows once $\Adm_c(g)$ is defined through $J_g^+(x)$. Likewise,
+\[
+\boxed{\psi_I\in L^2(\Adm_c(g),\mathcal B_g,\mu_g)
+\Rightarrow d\Prob_{\Psi,g}=|\psi_I|^2d\mu_g.}
+\]
+
+\subsection{Level B: Phenomenological Hypotheses}
+These are testable physical assumptions:
+\[
+\boxed{\Gamma_I=\kappa_I|c_1|^2|c_2|^2d_I^2([g_1],[g_2]),}
+\]
+\[
+\boxed{T_{\mu\nu}^{dark}\sim T_{\mu\nu}^{\chi},}
+\qquad
+\boxed{\Delta_a(E)=\zeta_a\frac{\chi_I^2(E)}{M_I^2}.}
+\]
+They must not be presented as established facts of nature.
+
+\subsection{Level C: Open Problems}
+The following remain open: the full fundamental measure $\mu_G$ in the continuum limit, the rigorous transition $N\to\infty$, the fundamental operator $\widehat{\mathcal H}_{TMI}$, the complete solution of the problem of time, the derivation of $SU(3)\times SU(2)\times U(1)$ as a unique low-energy limit, the derivation of exactly three generations, numerical masses, CKM and PMNS matrices, and concrete experimental constraints.
+
+\section{Main Theorem of the Regularized Physical Layer}
+\textbf{Theorem.} Let a regularized space of physical geometries be given by
+\[
+\boxed{\gfrak_N=\mathcal G_N/\Diff_N}
+\]
+with measure $\mu_G^{cyl}$ and interface distance $d_{I,N}$. Let
+\[
+\boxed{\Hilb_G^{eff}=L^2(\gfrak_N,\mathcal B_N,\mu_G^{cyl})}
+\]
+and let the interface decoherence coefficient be
+\[
+\boxed{\kappa_I=\frac{m_Ic^2}{\hbar}\mathcal K_I.}
+\]
+If the open dynamics of geometry is
+\[
+\boxed{
+\frac{d\rho_G}{dt}=-\frac{i}{\hbar}[\widehat H_G^{eff},\rho_G]
+-\frac12\kappa_I[\widehat D_I,[\widehat D_I,\rho_G]],
+}
+\]
+then off-diagonal elements between distinct geometric classes are suppressed with rate
+\[
+\boxed{\Gamma_I([g_1],[g_2])=\kappa_Id_{I,N}^2([g_1],[g_2]).}
+\]
+Consequently,
+\[
+\boxed{\rho_G([g_1],[g_2])\to0\quad([g_1]\ne[g_2])}
+\]
+and an effective classical geometry $g_{\mu\nu}^{cl}$ emerges.
+
+\textbf{Meaning of the theorem:}
+\[
+\boxed{\text{classical geometry is the interface-decohered limit of a quantum distribution of geometries.}}
+\]
+
+\section{Conclusion}
+The physical layer of the Theory of Manifold Interfaces is brought in this paper to the status of a regularized effective interface-field model. Its central formula is
+\[
+\boxed{
+ g\Rightarrow\Adm_c(g)\Rightarrow\Hilb_I(g)\Rightarrow\Psi_I
+ \Rightarrow\Dist_{\mathrm{poss}}(\Psi_I;g)\Rightarrow\chi_I\Rightarrow\Struct_I.
+}
+\]
+The extended architecture is
+\[
+\boxed{(g_{\mu\nu},\Psi,\chi_I,\Acal,\mathcal G_I)
+\Rightarrow(QG,SM,Gen,Dark,BH,ToE).}
+\]
+In this form, TMI-Physics has a mathematical framework, a physical action, equations of motion, regimes, limiting cases, and an observable matrix. It is not a completed fundamental theory. Its correct status is
+\[
+\boxed{TMI\text{-}Physics=\text{a regularized effective interface-field research program}.}
+\]
+
+\appendix
+\section{Unified Register of Notation}
+\begin{longtable}{p{0.26\linewidth}p{0.66\linewidth}}
+\toprule
+Symbol & Meaning \\
+\midrule
+$\M$ & spacetime of the Universe \\
+$g_{\mu\nu}$ & Lorentzian metric \\
+$T_x\M$ & tangent space at $x$ \\
+$\mathcal C^+_{I,g}(x)$ & future interface causal cone \\
+$J_g^+(x)$ & causal future of $x$ \\
+$\Adm_c(g)$ & set of causally admissible transitions \\
+$\mathcal B_g$ & $\sigma$-algebra of measurable subsets \\
+$\mu_g$ & effective or regularized measure \\
+$\Hilb_I(g)$ & Hilbert space of interface possibilities \\
+$\Psi_I,\psi_I$ & interface quantum state and wave function \\
+$\Dist_{\mathrm{poss}}$ & distribution of possibilities \\
+$\chi_I$ & interface field \\
+$\Struct_I$ & structured physical regime \\
+$\Gamma_I$ & interface decoherence rate \\
+$\kappa_I$ & strength coefficient of the interface channel \\
+$d_I$ & interface distance between geometries \\
+$\Acal$ & universal interface connection \\
+$\Fcal$ & universal interface curvature \\
+$\mathcal G_I$ & generation interface operator \\
+$\Delta\Gamma_I$ & excess interface decoherence \\
+$w_I(z)$ & equation-of-state parameter of interface dark energy \\
+$\rho_{corr}$ & correlation contribution to black-hole radiation \\
+$\Delta_a(E)$ & interface correction to gauge couplings \\
+\bottomrule
+\end{longtable}
+
+\section{Logical Order of Derivation}
+The definitions introduce $(\M,g)$, $\Adm_c(g)$, $\Hilb_I(g)$, $\Prob_{\Psi,g}$, $\chi_I$, and $\Struct_I$. The postulates of the physical layer are
+\[
+\boxed{P_1:\ g\Rightarrow\Adm_c(g),}
+\qquad
+\boxed{P_2:\ \Psi_I\Rightarrow\Dist_{\mathrm{poss}}(\Psi_I;g),}
+\qquad
+\boxed{P_3:\ \chi_I\Rightarrow\Struct_I.}
+\]
+Internal consequences follow from these definitions. Phenomenological hypotheses specify testable relations: $\Delta\Gamma_I=\kappa_Ix_I$, $T_{\mu\nu}^{dark}\sim T_{\mu\nu}^{\chi}$, $\rho_{rad}=\rho_{thermal}+\rho_{corr}$, and $\Delta_a(E)=\zeta_a\chi_I^2(E)/M_I^2$.
+
+\begin{thebibliography}{99}
+\bibitem{TMI-Full} Salkutsan Aleksey, \textit{Theory of Manifold Interfaces: An Axiomatic Conceptual-Mathematical Framework of Interfaciality, Meaning, and Cognition}, Zenodo. \href{https://doi.org/10.5281/zenodo.19940675}{https://doi.org/10.5281/zenodo.19940675}.
+\bibitem{TMI-Math} Salkutsan Aleksey, \textit{Mathematical Abstraction of the Theory of Manifold Interfaces}, Zenodo. \href{https://doi.org/10.5281/zenodo.19978895}{https://doi.org/10.5281/zenodo.19978895}.
+\bibitem{TMI-CautiousQG} Salkutsan Aleksey, \textit{Theory of Manifold Interfaces. A Cautious Interface Approach to Quantum Gravity}, Zenodo. \href{https://doi.org/10.5281/zenodo.19988505}{https://doi.org/10.5281/zenodo.19988505}.
+\bibitem{TMI-QG20} Salkutsan Aleksey, \textit{Theory of Manifold Interfaces TMI-QG-2.0: A Minimal Predictive Model of Interface-Induced Geometric Decoherence}, Zenodo. \href{https://doi.org/10.5281/zenodo.20013976}{https://doi.org/10.5281/zenodo.20013976}.
+\bibitem{TMI-BH} Salkutsan Aleksey, \textit{Black Holes in the Theory of Manifold Interfaces}, Zenodo. \href{https://doi.org/10.5281/zenodo.20025226}{https://doi.org/10.5281/zenodo.20025226}.
+\bibitem{TMI-Dark} Salkutsan Aleksey, \textit{The Dark Sector as an Interface Field. A Module of the Theory of Manifold Interfaces}, Zenodo. \href{https://doi.org/10.5281/zenodo.20025682}{https://doi.org/10.5281/zenodo.20025682}.
+\bibitem{TMI-ToE} Salkutsan Aleksey, \textit{Interface-Field Architecture for the Unification of Fundamental Interactions}, Zenodo. \href{https://doi.org/10.5281/zenodo.20025731}{https://doi.org/10.5281/zenodo.20025731}.
+\bibitem{Einstein1915} A. Einstein, \textit{Die Feldgleichungen der Gravitation}, Sitzungsberichte der Preussischen Akademie der Wissenschaften, 1915.
+\bibitem{Wald1984} R. M. Wald, \textit{General Relativity}, University of Chicago Press, 1984.
+\bibitem{Misner1973} C. W. Misner, K. S. Thorne, J. A. Wheeler, \textit{Gravitation}, W. H. Freeman, 1973.
+\bibitem{Weinberg1995} S. Weinberg, \textit{The Quantum Theory of Fields}, Vol. 1, Cambridge University Press, 1995.
+\bibitem{Peskin1995} M. E. Peskin and D. V. Schroeder, \textit{An Introduction to Quantum Field Theory}, Addison-Wesley, 1995.
+\bibitem{Bekenstein1973} J. D. Bekenstein, \textit{Black holes and entropy}, Physical Review D, 7(8), 1973.
+\bibitem{Hawking1975} S. W. Hawking, \textit{Particle creation by black holes}, Communications in Mathematical Physics, 43, 1975.
+\bibitem{Zurek2003} W. H. Zurek, \textit{Decoherence, einselection, and the quantum origins of the classical}, Reviews of Modern Physics, 75, 2003.
+\bibitem{Schlosshauer2007} M. Schlosshauer, \textit{Decoherence and the Quantum-to-Classical Transition}, Springer, 2007.
+\bibitem{Planck2020} Planck Collaboration, \textit{Planck 2018 results. VI. Cosmological parameters}, Astronomy \& Astrophysics, 641, A6, 2020.
+\end{thebibliography}
+
+\end{document}
