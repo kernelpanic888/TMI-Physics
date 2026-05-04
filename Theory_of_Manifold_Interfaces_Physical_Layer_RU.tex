@@ -1,0 +1,712 @@
+% !TEX program = xelatex
+\documentclass[12pt,a4paper]{article}
+
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{russian}
+\setotherlanguage{english}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{amsmath,amssymb,amsfonts,mathtools,bm}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{microtype}
+\geometry{margin=2.5cm}
+\hypersetup{colorlinks=true,linkcolor=black,urlcolor=blue,citecolor=black}
+\setlength{\emergencystretch}{3em}
+\sloppy
+
+\DeclareMathOperator{\Adm}{Adm}
+\DeclareMathOperator{\Struct}{Struct}
+\DeclareMathOperator{\Dist}{Dist}
+\DeclareMathOperator{\Dom}{Dom}
+\DeclareMathOperator{\Cond}{Cond}
+\DeclareMathOperator{\Loss}{Loss}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\Diff}{Diff}
+\DeclareMathOperator{\Spin}{Spin}
+\DeclareMathOperator{\Var}{Var}
+
+\newcommand{\M}{\mathcal M_U}
+\newcommand{\MI}{\mathcal M_I}
+\newcommand{\EI}{\mathcal E_I}
+\newcommand{\Hilb}{\mathcal H}
+\newcommand{\Prob}{\mathbb P}
+\newcommand{\Lag}{\mathcal L}
+\newcommand{\Acal}{\mathbb A_I}
+\newcommand{\Fcal}{\mathbb F_I}
+\newcommand{\TMI}{\mathcal T_{\mathrm{MI}}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\dd}{\,d}
+
+\newcommand{\statementbox}[1]{%
+\begin{center}%
+\fbox{\begin{minipage}{0.9\linewidth}\centering #1\end{minipage}}%
+\end{center}%
+}
+
+\title{\textbf{Теория многообразных интерфейсов}\
+\large Физический слой и интерфейсно-полевая программа}
+\author{Salkutsan Aleksey}
+\date{Май 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+В работе представлен физический слой Теории многообразных интерфейсов как эффективная интерфейсно-полевая исследовательская программа. Центральное утверждение состоит в том, что геометрия задаёт область допустимых физических переходов, квантовая теория задаёт распределение вероятностей по этой области, а интерфейсное поле осуществляет переход от распределённых возможностей к устойчивым физическим структурам. Вводится минимальное интерфейсное поле $\chi_I$, эффективное действие, объединяющее гравитационный сектор, Стандартную модель, интерфейсный сектор, смешивание и декогеренцию, а также проверочная матрица для квантово-геометрической декогеренции, тёмного сектора, чёрных дыр и интерфейсно-полевой архитектуры объединения. Работа не заявляет завершённую квантовую гравитацию или окончательную Theory of Everything. Она формулирует структурированную физическую программу с явными условиями согласованности, проверяемыми секторами и указанными ограничениями.
+\end{abstract}
+
+\noindent\textbf{Ключевые слова:} многообразные интерфейсы; интерфейсное поле; допустимые переходы; квантовая декогеренция; тёмный сектор; чёрные дыры; объединение взаимодействий; эффективная теория поля.
+
+\tableofcontents
+\newpage
+
+\section{Введение}
+Современная фундаментальная физика содержит несколько исключительно успешных, но концептуально раздельных описаний. Общая теория относительности описывает геометрию пространства-времени через метрику $g_{\mu\nu}$ и связывает её с энергией и импульсом через уравнение Эйнштейна,
+\[
+G_{\mu\nu}+\Lambda g_{\mu\nu}=\frac{8\pi G}{c^4}T_{\mu\nu}.
+\]
+Квантовая теория описывает состояния не как заранее определённые структуры, а как суперпозиции или вероятностные распределения,
+\[
+|\Psi\rangle=\sum_\alpha c_\alpha |s_\alpha\rangle.
+\]
+Теория многообразных интерфейсов (ТМИ) предлагает общий язык для связи допустимости, вероятности и структуры. Физический слой ТМИ организован цепочкой
+\[
+\boxed{
+g\Rightarrow \Adm_c(g)\Rightarrow \Hilb_I(g)\Rightarrow \Psi_I
+\Rightarrow \Dist_{\mathrm{poss}}(\Psi_I;g)\Rightarrow \chi_I\Rightarrow \Struct_I .}
+\]
+Смысл этой цепочки:
+\[
+\boxed{\text{геометрия задаёт допустимость;}}
+\qquad
+\boxed{\text{квантовая теория задаёт распределение;}}
+\qquad
+\boxed{\text{интерфейсное поле задаёт структурирование.}}
+\]
+
+У этой работы две задачи. Первая — дать чистую математико-физическую формулировку этой цепочки. Вторая — показать, как одна и та же интерфейсно-полевая архитектура даёт четыре физических режима: квантово-геометрическую декогеренцию, феноменологию тёмного сектора, чёрные дыры как интерфейсы и интерфейсно-полевую архитектуру объединения взаимодействий.
+
+Статус работы сознательно осторожный. ТМИ-Physics понимается как эффективная исследовательская программа. Здесь не утверждается, что уже выведена полная квантовая динамика геометрии, полная Стандартная модель или окончательная Theory of Everything. Более узкое утверждение состоит в следующем: если интерфейсное поле $\chi_I$ вводится как физический посредник между допустимыми возможностями и реализованной структурой, то можно сформулировать несколько проверяемых физических конструкций.
+
+\section{Связь с предыдущими публикациями ТМИ}
+Настоящая работа объединяет и систематизирует несколько предыдущих модулей Теории многообразных интерфейсов. В отдельных материалах рассматривались чёрные дыры, тёмный сектор, квантово-геометрическая декогеренция, математическая абстракция, осторожная квантово-гравитационная формулировка и интерфейсно-полевая архитектура объединения. В данной рукописи эти направления рассматриваются как режимы одного физического слоя. Предыдущие материалы перечислены в списке литературы и являются концептуальными предшественниками настоящего синтеза.
+
+\section{Геометрическая допустимость}
+Пусть $(\M,g)$ — пространство-время с лоренцевой метрикой. В каждой точке $x\in\M$ существует касательное пространство $T_x\M$. Определим будущий интерфейсный причинный конус:
+\[
+\boxed{
+\mathcal C^{+}_{I,g}(x):=
+\{v\in T_x\M\setminus\{0\}\mid g_x(v,v)\leq0,\ v\ \text{направлен в будущее}\}.
+}
+\]
+Это не новый причинный конус сверх общей теории относительности. Это стандартный будущий причинный конус, интерпретированный как локальная область допустимых направлений физического перехода:
+\[
+\mathcal C^{+}_{I,g}(x)\equiv \mathcal C^{+}_{g}(x).
+\]
+Его граница задаётся условием
+\[
+g_x(v,v)=0,
+\]
+поэтому совпадает со световым конусом:
+\[
+\boxed{\partial\mathcal C^{+}_{I,g}(x)\equiv \mathcal C^{+}_{\mathrm{light},g}(x).}
+\]
+Следовательно, скорость света в ТМИ интерпретируется как граница допустимого причинного интерфейсного перехода, а не как дополнительный постулат.
+
+Причинное будущее точки обозначается $J_g^+(x)$. Множество причинно допустимых переходов определяется так:
+\[
+\boxed{
+\Adm_c(g):=
+\{(x,y)\in\M\times\M\mid y\in J_g^+(x)\}.
+}
+\]
+Это фиксирует первый слой теории:
+\[
+\boxed{g\Rightarrow \mathcal C^+_{I,g}(x)\Rightarrow J_g^+(x)\Rightarrow \Adm_c(g).}
+\]
+Физический смысл: геометрия задаёт не только форму пространства-времени, но и область физически допустимых переходов.
+
+\section{Квантовое распределение по допустимой области}
+Геометрия задаёт, что допустимо, но не задаёт, какой именно допустимый переход реализуется. Квантовый слой назначает амплитуды и вероятности на области допустимых переходов.
+
+Вводится измеримое пространство
+\[
+(\Adm_c(g),\mathcal B_g,\mu_g),
+\]
+где $\mathcal B_g$ — $\sigma$-алгебра измеримых подмножеств, а $\mu_g$ — эффективная или регуляризованная мера. На фундаментальном уровне мера не считается полностью построенной. В зависимости от уровня модели она может быть дискретной мерой, минисуперпространственной мерой, цилиндрической мерой или эффективной мерой интеграла по путям.
+
+Гильбертово пространство интерфейсных возможностей:
+\[
+\boxed{
+\Hilb_I(g):=L^2(\Adm_c(g),\mathcal B_g,\mu_g).
+}
+\]
+Состояние $\psi_I\in\Hilb_I(g)$ задаёт вероятностную меру
+\[
+\boxed{
+d\Prob_{\Psi,g}(\Phi)=|\psi_I(\Phi)|^2\,d\mu_g(\Phi),
+\qquad \Phi\in\Adm_c(g).
+}
+\]
+Тем самым квантовый слой записывается как
+\[
+\boxed{
+\Adm_c(g)\Rightarrow \Hilb_I(g)\Rightarrow \Psi_I\Rightarrow \Dist_{\mathrm{poss}}(\Psi_I;g).
+}
+\]
+Квантовое состояние задаёт распределение по уже геометрически допустимой области.
+
+\section{Интерфейсное структурирование}
+Распределение вероятностей по допустимым переходам ещё не является реализованной структурой. ТМИ вводит интерфейсное поле, чтобы описать переход от распределённых возможностей к устойчивым физическим режимам.
+
+В минимальной модели интерфейсное поле является вещественным скалярным полем,
+\[
+\boxed{\chi_I:\M\to\mathbb R.}
+\]
+В более общей геометрической форме оно может быть сечением интерфейсного расслоения,
+\[
+\boxed{\chi_I\in\Gamma(\mathcal E_\chi),\qquad \mathcal E_\chi\to\M.}
+\]
+Отображение структурирования записывается как
+\[
+\boxed{
+\mathcal S_I:\Dist_{\mathrm{poss}}(\Psi_I;g)\longrightarrow \Struct_I.
+}
+\]
+Более полно:
+\[
+\boxed{
+\Struct_I=\mathcal S_I(g,\Psi_I,\chi_I,\Adm_c(g)).
+}
+\]
+То есть структура возникает не из одной геометрии и не из одной волновой функции, а из совместного действия геометрической допустимости, квантового распределения и интерфейсного поля.
+
+Первый вычислимый режим можно записать для двух геометрических альтернатив:
+\[
+|\Psi_g\rangle=c_1|g_1\rangle+c_2|g_2\rangle,
+\qquad |c_1|^2+|c_2|^2=1.
+\]
+В матрице плотности недиагональный элемент
+\[
+\rho_{12}=c_1\overline{c_2}
+\]
+задаёт когерентность между двумя геометриями. Интерфейсное структурирование моделируется подавлением этой когерентности:
+\[
+\boxed{
+|\rho_{12}(t)|=e^{-\Gamma_I t}|\rho_{12}(0)|.
+}
+\]
+Минимальная степень структурирования:
+\[
+\boxed{
+\Struct_I(t):=1-\frac{|\rho_{12}(t)|}{|\rho_{12}(0)|}=1-e^{-\Gamma_I t}.
+}
+\]
+
+\section{Минимальное эффективное действие}
+Физический слой кодируется минимальным эффективным действием
+\[
+\boxed{
+S_{TMI}^{min}=S_{GR}+S_{SM}+S_\chi+S_{mix}+S_{dec}^{eff}.
+}
+\]
+Развёрнуто:
+\[
+\boxed{
+S_{TMI}^{min}
+=
+\int_{\M}\sqrt{-g}\left[
+\frac{c^4}{16\pi G}(R-2\Lambda)
++\Lag_{SM}+\Lag_\chi+\Lag_{mix}
+\right]d^4x
++S_{dec}^{eff}.
+}
+\]
+Здесь $S_{dec}^{eff}$ — эффективный член открытой квантовой динамики, а не фундаментальное локальное действие.
+
+Лагранжиан интерфейсного поля:
+\[
+\boxed{
+\Lag_\chi
+=-\frac12 g^{\mu\nu}\nabla_\mu\chi_I\nabla_\nu\chi_I
+-V(\chi_I)-\frac12\xi_I R\chi_I^2.
+}
+\]
+Минимальный потенциал:
+\[
+\boxed{
+V(\chi_I)=V_0+\frac12 m_I^2\chi_I^2+\frac{\beta_I}{4}\chi_I^4.
+}
+\]
+Физическая устойчивость требует, чтобы потенциал был ограничен снизу. Достаточным условием является $\beta_I>0$ вместе с подходящей нижней границей $V(\chi_I)$.
+
+Чтобы не разрушать калибровочную инвариантность, $\chi_I$ берётся как синглет Стандартной модели,
+\[
+\chi_I\sim (1,1,0)
+\quad \text{относительно}\quad SU(3)\times SU(2)\times U(1).
+\]
+Минимальная безопасная форма смешивания:
+\[
+\boxed{
+\Lag_{mix}
+=
+-\frac14\sum_{a=1}^{3}\zeta_a\frac{\chi_I^2}{M_I^2}\Tr(F_{a\mu\nu}F_a^{\mu\nu})
++\eta_H\chi_I^2H^\dagger H
++\sum_f y_{I,f}\frac{\chi_I}{M_I}\overline{\Psi}_{L,f}H\Psi_{R,f}+h.c.
+}
+\]
+Последний член записан в форме, совместимой с полем Хиггса, чтобы не нарушать электрослабую калибровочную инвариантность до спонтанного нарушения симметрии.
+
+\section{Уравнения движения}
+Варьирование эффективного действия даёт геометрическое уравнение
+\[
+\boxed{
+G_{\mu\nu}+\Lambda g_{\mu\nu}
+=
+\frac{8\pi G}{c^4}
+\left(T_{\mu\nu}^{SM}+T_{\mu\nu}^{\chi}+T_{\mu\nu}^{mix}\right)
++\mathcal D_{\mu\nu}^{eff}.
+}
+\]
+Здесь $\mathcal D_{\mu\nu}^{eff}$ обозначает возможный эффективный вклад открытой квантовой динамики. Если обратное влияние декогеренции на геометрию не включается, можно положить $\mathcal D_{\mu\nu}^{eff}=0$.
+
+Для минимальной скалярной связи тензор энергии-импульса интерфейсного поля имеет вид
+\[
+\boxed{
+T_{\mu\nu}^{\chi}
+=
+\nabla_\mu\chi_I\nabla_\nu\chi_I
+-g_{\mu\nu}\left[\frac12 g^{\alpha\beta}\nabla_\alpha\chi_I\nabla_\beta\chi_I+V(\chi_I)\right].
+}
+\]
+Неминимальная связь даёт дополнительные члены
+\[
+\boxed{
+T_{\mu\nu}^{\chi,\xi}
+=\xi_I\left[G_{\mu\nu}\chi_I^2+g_{\mu\nu}\Box_g(\chi_I^2)-\nabla_\mu\nabla_\nu(\chi_I^2)\right].
+}
+\]
+
+Варьирование по $\chi_I$ даёт
+\[
+\boxed{
+\Box_g\chi_I-(m_I^2+\xi_I R)\chi_I-\beta_I\chi_I^3=-J_I.
+}
+\]
+Для квантово-геометрического режима источник можно взять в виде
+\[
+\boxed{
+J_I=\alpha_I D_g(\Psi_g),
+\qquad
+D_g(\Psi_g)=|c_1|^2|c_2|^2d_I^2(g_1,g_2).
+}
+\]
+Открытая квантовая динамика записывается как
+\[
+\boxed{
+\frac{d\rho}{dt}=-\frac{i}{\hbar}[\widehat H_{eff},\rho]+\mathcal L_{dec}^{I}[\rho].
+}
+\]
+Для двух геометрий получаем
+\[
+\boxed{|\rho_{12}(t)|=e^{-\Gamma_I t}|\rho_{12}(0)|.}
+\]
+
+\section{Режим квантово-геометрической декогеренции}
+Квантово-геометрический режим возникает, когда квантовое состояние содержит суперпозицию геометрических альтернатив,
+\[
+|\Psi_g\rangle=c_1|g_1\rangle+c_2|g_2\rangle.
+\]
+Геометрический контраст:
+\[
+\boxed{
+D_g(\Psi_g)=|c_1|^2|c_2|^2d_I^2(g_1,g_2).
+}
+\]
+Интерфейсный источник возбуждает $\chi_I$, а интерфейсное поле создаёт скорость декогеренции:
+\[
+\boxed{
+\Psi_g\Rightarrow D_g\Rightarrow J_I\Rightarrow \chi_I\Rightarrow \Gamma_I\Rightarrow \Struct_I.
+}
+\]
+Минимальная феноменологическая форма:
+\[
+\boxed{
+\Gamma_I=\kappa_I|c_1|^2|c_2|^2d_I^2(g_1,g_2).
+}
+\]
+В минисуперпространственной модели с масштабным фактором $a$:
+\[
+\boxed{
+d_I(g(a_1),g(a_2))=\left|\ln\frac{a_1}{a_2}\right|,
+}
+\]
+следовательно
+\[
+\boxed{
+\Gamma_I=\kappa_I|c_1|^2|c_2|^2\ln^2\left(\frac{a_1}{a_2}\right).
+}
+\]
+Наблюдаемая избыточная декогеренция:
+\[
+\boxed{
+\Delta\Gamma_I=\Gamma_{obs}-\Gamma_{std}=\kappa_I x_I,
+\qquad
+x_I=|c_1|^2|c_2|^2\ln^2\left(\frac{a_1}{a_2}\right).
+}
+\]
+Нулевая гипотеза: $H_0^{QG}:\kappa_I=0$. Гипотеза ТМИ: $H_{TMI}^{QG}:\kappa_I>0$.
+
+\section{Режим тёмного сектора}
+Режим тёмного сектора основан на гипотезе
+\[
+\boxed{
+T_{\mu\nu}^{dark}\sim T_{\mu\nu}^{\chi}.
+}
+\]
+Поле раскладывается на глобальную и локальную компоненты:
+\[
+\boxed{\chi_I(x,t)=\chi_0(t)+\delta\chi(x,t).}
+\]
+Глобальная компонента связывается с режимом тёмной энергии,
+\[
+\boxed{\chi_0(t)\Rightarrow DE,}
+\]
+локальная компонента — с режимом тёмной материи,
+\[
+\boxed{\delta\chi(x,t)\Rightarrow DM.}
+\]
+Для фоновой компоненты
+\[
+\boxed{
+\rho_{DE}^{I}=\frac12\dot\chi_0^2+V(\chi_0),
+\qquad
+p_{DE}^{I}=\frac12\dot\chi_0^2-V(\chi_0),
+}
+\]
+поэтому
+\[
+\boxed{
+w_I=\frac{p_{DE}^{I}}{\rho_{DE}^{I}}
+=\frac{\frac12\dot\chi_0^2-V(\chi_0)}{\frac12\dot\chi_0^2+V(\chi_0)}.
+}
+\]
+Если $\dot\chi_0^2\ll V(\chi_0)$, то $w_I\approx -1$.
+
+Для локальной компоненты приближённое уравнение моды:
+\[
+\boxed{
+\delta\ddot\chi+3H\delta\dot\chi-\frac{\nabla^2}{a^2}\delta\chi+m_{eff}^2\delta\chi=0,
+}
+\]
+где
+\[
+\boxed{m_{eff}^2=m_I^2+3\beta_I\chi_0^2+\xi_I R.}
+\]
+Осциллирующие локальные моды могут вести себя как бездавленческая компонента: $\langle p_{DM}^{I}\rangle\approx0$ и $\rho_{DM}^{I}\propto a^{-3}$.
+
+Проверка тёмного сектора не означает, что ТМИ уже доказала природу реальной тёмной материи и тёмной энергии. Условная проверка такова: если тёмный сектор создаётся полем $\chi_I$, то возможные отклонения должны появиться в наборе
+\[
+\boxed{
+\mathcal O_{Dark}=\{w_I(z),H(z),\Delta v_c^2(r),\Delta\alpha_{lens},G_{eff}(k,z),\Delta\Gamma_I^{dark}\}.
+}
+\]
+
+\section{Режим чёрной дыры как интерфейса}
+Чёрная дыра интерпретируется как предельный причинно-информационный интерфейс. В стандартных геометрических терминах
+\[
+\boxed{
+\mathcal B_g=\M\setminus J_g^-(\mathcal I^+),
+\qquad
+\mathcal H_g=\partial\mathcal B_g.
+}
+\]
+В ТМИ горизонт событий является границей внешней допустимости:
+\[
+\boxed{\mathcal H_g=\partial\Adm_{out}.}
+\]
+Для геометрии Шварцшильда
+\[
+\boxed{
+ds^2=-\left(1-\frac{r_s}{r}\right)c^2dt^2+\left(1-\frac{r_s}{r}\right)^{-1}dr^2+r^2d\Omega^2,
+\qquad
+r_s=\frac{2GM}{c^2}.
+}
+\]
+Радиальные световые лучи удовлетворяют
+\[
+\boxed{\frac{dr}{dt}=\pm c\left(1-\frac{r_s}{r}\right).}
+\]
+Горизонт отмечает границу, где классический внешний канал закрывается. В интерфейсной записи
+\[
+\boxed{r<r_s\Rightarrow \Adm_{out}^{class}(I_{BH})=\varnothing,
+\qquad \Adm_{in}(I_{BH})\neq\varnothing.}
+\]
+
+Энтропия горизонта интерпретируется как информационная ёмкость интерфейса:
+\[
+\boxed{
+S_{BH}=\frac{k_Bc^3A}{4G\hbar}=\mathrm{Cap}_{info}(I_{BH}).
+}
+\]
+Число битов:
+\[
+\boxed{N_{bits}=\frac{A}{4l_P^2\ln2}.}
+\]
+Возможная наблюдаемая величина TMI-BH — нетепловые корреляции в излучении Хокинга:
+\[
+\boxed{
+\rho_{rad}=\rho_{thermal}+\rho_{corr},
+\qquad
+\Cond_{info}^{quant}>0\Rightarrow \rho_{corr}\neq0.
+}
+\]
+Также возможна гипотеза усиленной декогеренции около чёрной дыры:
+\[
+\boxed{
+\Gamma_{BH}^{I}=\gamma_I\frac{S_{BH}}{k_B}.
+}
+\]
+Это феноменологическая гипотеза, а не вывод полной квантовой гравитации.
+
+\section{Интерфейсно-полевая архитектура объединения}
+Раздел объединения формулируется как интерфейсно-полевая архитектура, а не как завершённая Theory of Everything. Четыре фундаментальных взаимодействия рассматриваются как интерфейсные каналы:
+\[
+\boxed{
+\mathcal F_{phys}=\{I_G,I_{EM},I_W,I_S\}.
+}
+\]
+Они интерпретируются как проекции универсальной физической интерфейсной структуры.
+
+Вводится универсальное интерфейсное расслоение
+\[
+\boxed{\pi_I:\mathcal E_I\to\M,}
+\]
+и универсальная интерфейсная связность
+\[
+\boxed{\Acal\in\Omega^1(\M,\mathfrak g_I).}
+\]
+Безопасное условие включения:
+\[
+\boxed{G_I\supset \Spin(1,3)\times SU(3)\times SU(2)\times U(1).}
+\]
+В минимальной архитектуре можно записать
+\[
+\boxed{
+G_I=G_{grav}\ltimes G_{SM}\ltimes G_\chi,
+\qquad
+G_{SM}=SU(3)\times SU(2)\times U(1).
+}
+\]
+Связность раскладывается так:
+\[
+\boxed{
+\Acal=\omega^{ab}J_{ab}+e^aP_a+G^AT_A+W^iT_i+BY+A_\chi\Xi.
+}
+\]
+Кривизна:
+\[
+\boxed{\Fcal=d\Acal+\Acal\wedge\Acal.}
+\]
+Секторные проекции являются отображениями
+\[
+\boxed{\pi_a:\mathfrak g_I\to\mathfrak g_a,
+\qquad a\in\{G,S,W,EM\},}
+\]
+при этом
+\[
+\boxed{F_a=\pi_a(\Fcal).}
+\]
+Первый феноменологический выход — интерфейсная поправка к калибровочным связям:
+\[
+\boxed{
+\frac{1}{g_{a,eff}^2}=\frac{1}{g_a^2}+\zeta_a\frac{\chi_I^2}{M_I^2},
+\qquad
+\Delta_a(E)=\zeta_a\frac{\chi_I^2(E)}{M_I^2}.
+}
+\]
+
+\section{Единая наблюдаемая матрица}
+Физический слой является проверяемым только тогда, когда его режимы связаны с наблюдаемыми величинами. Предлагаемая матрица:
+\[
+\boxed{
+\mathcal T_{TMI}^{phys}
+=
+\left(
+\Delta\Gamma_I,
+ w_I(z),
+ G_{eff}(k,z),
+ \rho_{corr},
+ \Delta_a(E)
+\right).
+}
+\]
+Смысл:
+\begin{longtable}{p{0.25\linewidth}p{0.32\linewidth}p{0.32\linewidth}}
+\toprule
+Режим & Наблюдаемая величина & Нулевая гипотеза \\
+\midrule
+QG & $\Delta\Gamma_I$ & нет избыточной геометрической декогеренции \\
+Dark & $w_I(z),G_{eff}(k,z)$ & $\Lambda$CDM-подобная независимость тёмной материи и тёмной энергии \\
+BH & $\rho_{corr}$ & чисто тепловое излучение в соответствующем приближении \\
+ToE & $\Delta_a(E)$ & нет интерфейсной поправки к калибровочным связям \\
+\bottomrule
+\end{longtable}
+
+Статистическая форма QG-модуля:
+\[
+\boxed{
+y_i=\Delta\Gamma^{(i)}=\kappa_Ix_I^{(i)}+\eps_i,
+\qquad
+\mathbb E[\eps_i]=0.
+}
+\]
+При равных дисперсиях
+\[
+\boxed{
+\widehat\kappa_I=\frac{\sum_i x_I^{(i)}y_i}{\sum_i(x_I^{(i)})^2}.
+}
+\]
+Минимальная QG-гипотеза получает поддержку только если $\widehat\kappa_I>0$ и доверительный интервал не содержит ноль. Она ослабляется или отклоняется, если $\Delta\Gamma_I$ не масштабируется с $x_I$.
+
+\section{Условия согласованности}
+Физический слой должен восстанавливать известные теории в соответствующих пределах:
+\[
+\boxed{\chi_I\to0,\ S_{mix}\to0\Rightarrow TMI\to GR+SM.}
+\]
+Если убрать материю и калибровочные поля, предел должен сводиться к общей теории относительности:
+\[
+\boxed{S_{matter}\to0\Rightarrow TMI\to GR.}
+\]
+При фиксированной геометрии и исчезающей интерфейсной декогеренции
+\[
+\boxed{\chi_I\to0,\ \Gamma_I\to0\Rightarrow \text{стандартная квантовая эволюция}.}
+\]
+Для сектора объединения
+\[
+\boxed{E\ll M_I,
+\quad \chi_I\to0,
+\quad \zeta_a,\eta_H,y_{I,f}\to0
+\Rightarrow S_{TMI}\to S_{SM}.}
+\]
+Эти условия являются обязательными. Без них интерфейсная модель была бы несовместима с установленной физикой.
+
+\section{Уровни утверждений и ограничения}
+Необходимо различать три уровня утверждений.
+
+\subsection*{Уровень A: внутренние следствия}
+Это утверждения, следующие из определений. Например,
+\[
+g\Rightarrow\Adm_c(g)
+\]
+следует после определения $\Adm_c(g)$ через $J_g^+(x)$. Аналогично,
+\[
+\psi_I\in L^2(\Adm_c(g),\mathcal B_g,\mu_g)
+\Rightarrow
+ d\Prob_{\Psi,g}=|\psi_I|^2d\mu_g.
+\]
+
+\subsection*{Уровень B: феноменологические гипотезы}
+Это проверяемые физические предположения, например
+\[
+\Gamma_I=\kappa_I|c_1|^2|c_2|^2d_I^2(g_1,g_2),
+\qquad
+T_{\mu\nu}^{dark}\sim T_{\mu\nu}^{\chi}.
+\]
+Их нельзя считать установленными фактами природы.
+
+\subsection*{Уровень C: открытые задачи}
+В данной работе не решается полная проблема меры на пространстве геометрий, не выводится $\kappa_I$ из фундаментальных констант, не выводится полная Стандартная модель, не объясняются поколения фермионов и не строится полная квантовая теория метрики. Это исследовательские задачи, а не скрытые допущения.
+
+\section{Заключение}
+Физический слой Теории многообразных интерфейсов сводится к цепочке
+\[
+\boxed{
+g\Rightarrow\Adm_c(g)\Rightarrow\Hilb_I(g)\Rightarrow\Psi_I
+\Rightarrow\Dist_{\mathrm{poss}}(\Psi_I;g)
+\Rightarrow\chi_I\Rightarrow\Struct_I.
+}
+\]
+Теория утверждает: геометрия задаёт допустимость, квантовая теория задаёт распределение, а интерфейсное поле задаёт структурирование. Минимальная физическая модель записывается как
+\[
+\boxed{
+S_{TMI}^{min}=S_{GR}+S_{SM}+S_\chi+S_{mix}+S_{dec}^{eff}.
+}
+\]
+В этой рамке QG, Dark, BH и ToE являются не независимыми метафорами, а режимами одной интерфейсно-полевой архитектуры:
+\[
+\boxed{(g_{\mu\nu},\Psi,\chi_I,\Acal)\Rightarrow(QG,Dark,BH,ToE).}
+\]
+Результат не является финальной фундаментальной теорией. Это структурированная эффективная исследовательская программа с явными определениями, условиями согласованности, проверяемыми наблюдаемыми величинами и открытыми задачами.
+
+\appendix
+\section{Реестр обозначений}
+\begin{longtable}{p{0.25\linewidth}p{0.65\linewidth}}
+\toprule
+Обозначение & Значение \\
+\midrule
+$\M$ & пространство-время Вселенной \\
+$g_{\mu\nu}$ & лоренцева метрика \\
+$\mathcal C^+_{I,g}(x)$ & будущий интерфейсный причинный конус \\
+$J_g^+(x)$ & причинное будущее точки $x$ \\
+$\Adm_c(g)$ & множество причинно допустимых переходов \\
+$\Hilb_I(g)$ & гильбертово пространство интерфейсных возможностей \\
+$\mu_g$ & эффективная или регуляризованная мера на допустимых переходах \\
+$\Psi_I,\psi_I$ & интерфейсное квантовое состояние и волновая функция \\
+$\Dist_{\mathrm{poss}}$ & распределение возможностей \\
+$\chi_I$ & интерфейсное поле \\
+$\Gamma_I$ & скорость интерфейсной декогеренции \\
+$\Struct_I$ & структурированный физический режим \\
+$\Acal$ & универсальная интерфейсная связность \\
+$\Fcal$ & универсальная интерфейсная кривизна \\
+$\Delta\Gamma_I$ & избыточная интерфейсная декогеренция \\
+$w_I(z)$ & параметр состояния интерфейсной тёмной энергии \\
+$\rho_{corr}$ & корреляционный вклад в излучение чёрной дыры \\
+$\Delta_a(E)$ & интерфейсная поправка к калибровочным связям \\
+\bottomrule
+\end{longtable}
+
+\section{Логическое ядро}
+Определения задают $\M$, $g$, $\Adm_c(g)$, $\Hilb_I(g)$, $\Prob_{\Psi,g}$, $\chi_I$ и $\Struct_I$. Основные постулаты:
+\[
+\boxed{P_1:\ g\Rightarrow\Adm_c(g),}
+\qquad
+\boxed{P_2:\ \Psi_I\Rightarrow\Dist_{\mathrm{poss}}(\Psi_I;g),}
+\qquad
+\boxed{P_3:\ \chi_I\Rightarrow\Struct_I.}
+\]
+Феноменологические гипотезы — это конкретные законы связи с измеримыми величинами: $\Delta\Gamma_I=\kappa_Ix_I$, $T_{\mu\nu}^{dark}\sim T_{\mu\nu}^{\chi}$, $\rho_{rad}=\rho_{thermal}+\rho_{corr}$ и $\Delta_a(E)=\zeta_a\chi_I^2(E)/M_I^2$.
+
+\section{Открытые исследовательские задачи}
+Ближайшие технические задачи: построить хотя бы одну полностью явную меру $\mu_g$ в вычислимой модели; вывести или ограничить $\kappa_I$ из действия интерфейсного поля; сравнить законы декогеренции $p=1$ и $p=2$,
+\[
+\Delta\Gamma_I=\kappa_Ix_I^p,
+\qquad p\in\{1,2\};
+\]
+превратить тёмный сектор в численную космологическую модель; уточнить критерий корреляций для чёрных дыр; определить группу объединения $G_I$ строже, чем через безопасное условие включения.
+
+\begin{thebibliography}{99}
+\bibitem{TMI-BH} Salkutsan Aleksey, \textit{Black Holes in the Theory of Manifold Interfaces}, Zenodo. \href{https://doi.org/10.5281/zenodo.20025226}{https://doi.org/10.5281/zenodo.20025226}.
+\bibitem{TMI-ToE} Salkutsan Aleksey, \textit{Interface-Field Architecture for the Unification of Fundamental Interactions}, Zenodo. \href{https://doi.org/10.5281/zenodo.20025731}{https://doi.org/10.5281/zenodo.20025731}.
+\bibitem{TMI-Dark} Salkutsan Aleksey, \textit{The Dark Sector as an Interface Field. A Module of the Theory of Manifold Interfaces}, Zenodo. \href{https://doi.org/10.5281/zenodo.20025682}{https://doi.org/10.5281/zenodo.20025682}.
+\bibitem{TMI-QG20} Salkutsan Aleksey, \textit{Theory of Manifold Interfaces TMI-QG-2.0: A Minimal Predictive Model of Interface-Induced Geometric Decoherence}, Zenodo. \href{https://doi.org/10.5281/zenodo.20013976}{https://doi.org/10.5281/zenodo.20013976}.
+\bibitem{TMI-Math} Salkutsan Aleksey, \textit{Mathematical Abstraction of the Theory of Manifold Interfaces}, Zenodo. \href{https://doi.org/10.5281/zenodo.19978895}{https://doi.org/10.5281/zenodo.19978895}.
+\bibitem{TMI-CautiousQG} Salkutsan Aleksey, \textit{Theory of Manifold Interfaces. A Cautious Interface Approach to Quantum Gravity}, Zenodo. \href{https://doi.org/10.5281/zenodo.19988505}{https://doi.org/10.5281/zenodo.19988505}.
+\bibitem{Einstein1915} A. Einstein, \textit{Die Feldgleichungen der Gravitation}, Sitzungsberichte der Preussischen Akademie der Wissenschaften, 1915.
+\bibitem{Wald1984} R. M. Wald, \textit{General Relativity}, University of Chicago Press, 1984.
+\bibitem{Bekenstein1973} J. D. Bekenstein, \textit{Black holes and entropy}, Physical Review D, 7(8), 1973.
+\bibitem{Hawking1975} S. W. Hawking, \textit{Particle creation by black holes}, Communications in Mathematical Physics, 43, 1975.
+\bibitem{Zurek2003} W. H. Zurek, \textit{Decoherence, einselection, and the quantum origins of the classical}, Reviews of Modern Physics, 75, 2003.
+\bibitem{Schlosshauer2007} M. Schlosshauer, \textit{Decoherence and the Quantum-to-Classical Transition}, Springer, 2007.
+\bibitem{Weinberg1995} S. Weinberg, \textit{The Quantum Theory of Fields}, Vol. 1, Cambridge University Press, 1995.
+\end{thebibliography}
+
+\end{document}
